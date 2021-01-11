@@ -37,6 +37,7 @@
             <th scope="col">Nama Cinema</th>
             <th scope="col">Total Harga</th>
             <th scope="col">Pembelian</th>
+            <th scope="col">Jam Tayang</th>
             <!-- <th scope="col">Sinopsis</th> -->
             <!-- <th scope="col">Action</th> -->
           </tr>
@@ -55,6 +56,7 @@
               <td><?= $row['totalharga']; ?></td>
               
               <td><?= $row['pembelian']; ?></td>
+              <td><?= $row['jam']; ?> </td>
               <td>
         </div>
         <?php endforeach; ?>

@@ -5,6 +5,7 @@ use App\Models\FilmModel;
 use App\Models\CinemaModel;
 // use App\Models\AuthModel;
 use App\Models\TransaksiModel;
+use App\Models\JadwalModel;
 
 class Pages extends BaseController
 {
@@ -14,6 +15,7 @@ class Pages extends BaseController
 		helper('form');
 		$this->cinema = new CinemaModel();
 		$this->transaksi = new TransaksiModel();
+		$this->jadwal = new JadwalModel();
 		// $this->auth = new AuthModel();
 	}
 	public function home()
@@ -82,6 +84,7 @@ class Pages extends BaseController
 	{
 		$data['cinema'] =$this->cinema->getCinema();
 		// $data['users'] = $this->
+		$data['jadwal'] =$this->jadwal->getJadwal();
 		$data['film'] = $this->film->getFilm($id)[0];
 		// dd($data);
 		echo view('layout/header');
@@ -160,8 +163,8 @@ class Pages extends BaseController
 		if ($hapus) {
 			// Redirect ke halaman product
 			return redirect()->to(base_url('/admintransaksi'));
-}
-}
+		}
+	}
 
 	public function store()
 	{
@@ -445,6 +448,7 @@ class Pages extends BaseController
 		$nama_cinema = $this->request->getPost('nama_cinema');
 		$totalharga = $this->request->getPost('totalharga');
 		$pembelian = $this->request->getPost('pembelian');
+		$jam = $this->request->getPost('jam');
     	// Membuat array collection yang disiapkan untuk insert ke table
 		$data = [
 			'id_transaksi' => $id_transaksi,
@@ -456,7 +460,8 @@ class Pages extends BaseController
 			// 'id_cinema' => $id_cinema,
 			'nama_cinema' => $nama_cinema,
 			'totalharga' => $totalharga,
-			'pembelian' => $pembelian
+			'pembelian' => $pembelian,
+			'jam' => $jam
 		];
 
 		// $data = [
@@ -486,15 +491,103 @@ class Pages extends BaseController
 	}
 
 
+	public function adminjadwal()
+	{
+		$data['jadwal'] = $this->jadwal->getJadwal();
+		echo view("layout/headeradmin");
+		echo view("pages/adminjadwal",$data);
+		echo view("layout/footer");
+	}
 
-	
+	public function addjadwal()
+	{
+		echo view("layout/headeradmin");
+		echo view("pages/addjadwal");
+		echo view("layout/footer");
+	}
+
+	public function editjadwal($id)
+	{
+		$data['jadwal'] = $this->jadwal->getJadwal($id)[0];
+		echo view("layout/headeradmin");
+		echo view("pages/editjadwal",$data);
+		echo view("layout/footer");
+	}
+
+
+	public function insertjadwal()
+	{
+		// Mengambil value dari form dengan method POST
+		// $id_jadwal = $this->request->getPost('id_jadwal');
+		$jam = $this->request->getPost('jam');
+		$stock = $this->request->getPost('stock');
+		
+    	// Membuat array collection yang disiapkan untuk insert ke table
+		$data = [
+			// 'id_jadwal' => $id_jadwal,
+			'jam' => $jam,
+			'stock' => $stock
+			
+		];
+
+		/* 
+		Membuat variabel simpan yang isinya merupakan memanggil function 
+		insert_product dan membawa parameter data 
+		*/
+		$simpan = $this->jadwal->insert_jadwal($data);
+
+		// Jika simpan berhasil, maka ...
+		if ($simpan) {
+			// Redirect halaman ke product
+			return redirect()->to(base_url('/adminjadwal'));
+		}
+	}
+
+
+
+	public function delete_jadwal($id)
+	{
+		// Memanggil function delete_product() dengan parameter $id di dalam ProductModel dan menampungnya di variabel hapus
+		$hapus = $this->jadwal->delete_jadwal($id);
+
+		// Jika berhasil melakukan hapus
+		if ($hapus) {
+			// Redirect ke halaman product
+			return redirect()->to(base_url('/adminjadwal'));
+		}
+	}
+
+
+public function update_jadwal($id)
+	{
+		// Mengambil value dari form dengan method POST
+		$id_jadwal = $this->request->getPost('id_jadwal');
+		$jam = $this->request->getPost('jam');
+		$stock = $this->request->getPost('stock');
+		
+		// Membuat array collection yang disiapkan untuk insert ke table
+		$data = [
+			'id_jadwal' => $id_jadwal,
+			'jam' => $jam,
+			'stock' => $stock
+			
+		];
+
+		/* 
+        Membuat variabel ubah yang isinya merupakan memanggil function 
+        update_product dan membawa parameter data beserta id
+        */
+		$ubah = $this->jadwal->update_jadwal($data, $id);
+
+		// Jika berhasil melakukan ubah
+		if ($ubah) {
+			// Redirect ke halaman product
+			return redirect()->to(base_url('/adminjadwal'));
 
 
 
 
+}
 
-
-
-
-
+}
 }

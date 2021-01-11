@@ -49,12 +49,12 @@
       <!-- <output  id="result"></output> -->
       <input class="form-control" type="number" placeholder="Total Harga" id="totalharga" name="totalharga" readonly><br/>
 
-      <br> 
+      
 
       <label for="durasi">Durasi : <?= $film['durasi']; ?></label>
       <br> <br>
       <!-- <label for="stock">Stock : </label> -->
-      <br><br>
+      
       <label for="cinema">Choose Your Cinema :</label>
       <select name="nama_cinema" id="nama_cinema">
         <?php foreach ($cinema as $key => $row) : ?>
@@ -66,7 +66,18 @@
       <?php endforeach; ?>
     </select>
     <br><br>
-    <label for="pembayaran">Metode Pembayaran : </label>
+    <label for="jam">JAM TAYANG : </label>
+     <select name="jam" id="jam">
+        <?php foreach ($jadwal as $key => $row) : ?>
+        <option value="<?= $row['jam'] ?>"><?= $row['jam'] ?></option>
+
+
+
+      <?php endforeach; ?>
+    </select>
+    <br><br>
+   
+    <label for="pembayaran">Metode Pembayaran  </label>
     <!-- <input class="form-control" type="text" name="pembayaran" id="pembayaran" placeholder="OVO" required> -->
     <select name="pembayaran" id="pembayaran">
       <option value="OVO" selected="">OVO</option>

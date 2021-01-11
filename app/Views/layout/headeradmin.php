@@ -55,6 +55,7 @@ body {
   <a href="/cinemaadmin">Theatre</a>
   <a href="/user">User</a>
   <a href="/admintransaksi">History Transaksi</a>
+  <a href="/adminjadwal">Jadwal</a>
   <br><br>
 
   <a href="/">HOME</a>

@@ -49,6 +49,9 @@ $routes->get('/cinemaedit','pages::cinemaedit');
 $routes->get('/tiket','pages::tiket');
 $routes->get('/admintransaksi','pages::admintransaksi');
 $routes->get('/terimakasih','pages::terimakasih');
+$routes->get('/adminjadwal','pages::adminjadwal');
+$routes->get('/editjadwal','pages::editjadwal');
+$routes->get('/addjadwal','pages::addjadwal');
 
 /**
  * --------------------------------------------------------------------
